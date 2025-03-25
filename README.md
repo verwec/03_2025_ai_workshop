@@ -1,74 +1,99 @@
-# OpenAI Chat Bot
+# Chat Application with Context-Aware Responses
 
-A simple Python application that interacts with OpenAI's Chat Completions API.
+This is a web-based chat application that provides context-aware responses using OpenAI's GPT-4 model. The application consists of a Flask backend and a modern HTML/JavaScript frontend.
+
+## Features
+
+- Real-time chat interface with a clean, modern design
+- Context-aware responses using vector similarity search
+- Support for chat history
+- Responsive design that works on both desktop and mobile
+- Loading indicators for better user experience
+- Error handling and graceful fallbacks
 
 ## Prerequisites
 
-- Python 3.6 or higher
-- OpenAI Python package
+- Python 3.x
 - OpenAI API key
+- Required Python packages (listed in requirements.txt)
 
-## Installation
+## Setup
 
-1. Clone this repository
-2. Install the required package:
+1. Clone the repository:
 ```bash
-pip install openai
+git clone <repository-url>
+cd chat-live
 ```
 
-## Setting up your OpenAI API Key
-
-Before running the application, you need to set up your OpenAI API key as an environment variable. Here's how to do it on different operating systems:
-
-### Linux/macOS
-
-Temporary (current terminal session only):
+2. Install the required packages:
 ```bash
-export OPENAI_API_KEY='your-api-key-here'
+pip install -r requirements.txt
 ```
 
-Permanent:
-1. Open your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.):
-```bash
-nano ~/.bashrc  # or ~/.zshrc for Zsh
+3. Create a `.env` file in the root directory and add your OpenAI API key:
 ```
-2. Add the following line:
-```bash
-export OPENAI_API_KEY='your-api-key-here'
-```
-3. Save and reload the configuration:
-```bash
-source ~/.bashrc  # or source ~/.zshrc for Zsh
+OPENAI_API_KEY=your_api_key_here
 ```
 
-### Windows
-
-Temporary (current Command Prompt session only):
-```cmd
-set OPENAI_API_KEY=your-api-key-here
-```
-
-Permanent:
-1. Using Command Prompt (Run as Administrator):
-```cmd
-setx OPENAI_API_KEY "your-api-key-here"
-```
-2. Or through Windows GUI:
-   - Press Win + X and select "System"
-   - Click on "Advanced system settings"
-   - Click on "Environment Variables"
-   - Under "User variables" click "New"
-   - Variable name: OPENAI_API_KEY
-   - Variable value: your-api-key-here
-   - Click "OK" to save
-
-## Usage
-
-Run the application:
+4. Start the Flask server:
 ```bash
 python app.py
 ```
 
-## Note
+The server will start on `http://localhost:5001`
 
-Make sure to replace 'your-api-key-here' with your actual OpenAI API key. Never commit your API key to version control. If you accidentally expose your API key, immediately rotate it in your OpenAI account settings. 
+5. Open `index.html` in your web browser to access the chat interface.
+
+## Project Structure
+
+- `app.py`: Flask backend server with chat endpoint
+- `index.html`: Frontend chat interface
+- `vectorstore_example.py`: Vector store implementation for context retrieval
+- `requirements.txt`: Python package dependencies
+
+## API Endpoints
+
+### POST /chat
+
+Sends a message to the chat endpoint and receives a context-aware response.
+
+Request body:
+```json
+{
+    "query": "Your message here"
+}
+```
+
+Response:
+```json
+{
+    "message": "AI response here"
+}
+```
+
+## Usage
+
+1. Type your message in the input field
+2. Press Enter or click the Send button
+3. Wait for the AI's response
+4. The conversation history will be displayed in the chat window
+
+## Technical Details
+
+- The application uses Flask for the backend server
+- CORS is enabled to allow frontend-backend communication
+- The chat interface is built with vanilla JavaScript and modern CSS
+- Context retrieval is implemented using vector similarity search
+- OpenAI's GPT-4 model is used for generating responses
+
+## Error Handling
+
+The application includes error handling for:
+- Network connectivity issues
+- API request failures
+- Invalid responses
+- Empty messages
+
+## Contributing
+
+Feel free to submit issues and enhancement requests! 
